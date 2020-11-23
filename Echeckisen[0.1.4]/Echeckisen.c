@@ -86,11 +86,11 @@
 		- Function getTypeChar() added for better comfort
 		BUGS : Turn timer not updating when moving a piece
 	
-	10/01/2019 > [0.1.3] :
+	10/01/2020 > [0.1.3] :
 		- Fixed previous turn timer bug
 		- Save system implemented (in save/save.txt)
 
-	12/01/2019 > [0.1.4] :
+	12/01/2020 > [0.1.4] :
 		- Graphic interface activator at start of Echeckisen.c, Echeckisen.h and makefile
 		- Separation in 2 files (+headers) : Echeckisen.c/.h Utilities.c/.h
 
