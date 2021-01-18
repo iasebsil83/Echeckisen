@@ -1,6 +1,6 @@
 #to activate graphic mode :
 #	uncomment the line below
-	G = "GRAPHICS_ON"
+#	G = "GRAPHICS_ON"
 #	do the same in Echeckisen.c and in Echeckisen.h before compilation
 
 
@@ -12,12 +12,14 @@
 ifeq ($(G),"GRAPHICS_ON")
 
 run: Echeckisen.o Utilities.o libisentlib.a
+	@echo "\nCompiling in GRAPHIC mode :\n"
 	gcc -Wall -o run Echeckisen.o Utilities.o libisentlib.a -O2 -lm -lglut -lGL -lX11
 	rm -f *.o libisentlib.a
 
 else
 
 run: Echeckisen.o Utilities.o
+	@echo "\nCompiling in CONSOLE mode :\n"
 	gcc -Wall -o run Utilities.o Echeckisen.o -O2 -lpthread
 	rm -f *.o libisentlib.a
 

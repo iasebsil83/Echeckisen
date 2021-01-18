@@ -8,7 +8,7 @@
 
 //to activate graphic mode :
 //	uncomment the line below
-	#define GRAPHICS_ON
+//	#define GRAPHICS_ON
 //	do the same in Echeckisen.h and makefile before compilation
 
 //keys for console-only mode
@@ -16,6 +16,9 @@
 //	- L : go down
 //	- K : go left
 //	- M : go right
+//      - A : Action
+
+//console-only mode does not have DRAW key (not pertinent)
 
 
 
@@ -35,7 +38,6 @@
 #endif
 //game
 #include "Utilities.h"
-#include "Echeckisen.h"
 
 
 
@@ -56,69 +58,72 @@
 
 
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Echeckisen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	Developped using GfxLib :
-	Project developped for ISEN Toulon, an Yncrea Mediterranee engineering school
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~ Echeckisen [0.1.5] ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Developped using GfxLib :
+        Project developped for ISEN Toulon, an Yncrea Mediterranee engineering school
 
-	08/01/2020 > [0.1.0] :
-		- Defining player and square structures and enums
-		- Graphic and console display of board and squares
-		- Turn counters for each player and total
-		- Time spent for each player and total
-		- Timer for the current turn (automatic turn switch)
-		- Selection system : MOVE / POSSIBILITY options
-		- Possibility calculations for each piece
-		BUGS : Images are incorrectly displayed
+    08/01/2020 > [0.1.0] :
+        - Defining player and square structures and enums
+        - Graphic and console display of board and squares
+        - Turn counters for each player and total
+        - Time spent for each player and total
+        - Timer for the current turn (automatic turn switch)
+        - Selection system : MOVE / POSSIBILITY options
+        - Possibility calculations for each piece
+        BUGS : Images are incorrectly displayed
 
-	09/01/2020 > [0.1.1] :
-		- Added a few sprites
-		- Fixed image display bugs (Echeckisen.c and GfxLib.c)
-		- Dead squares system
-		- Functions existsDead(), addDead() and rmvDead() implemented
-		- Pawn transformation (inside rmvDead() and moveSquare())
-		- Player attribute "checked" and function checkForChecked() (without content)
-		- Save option key (input and display without save system)
-		BUGS : Pawns can kill in front of them
-		NOTES : MOVE and POSSIBILITIES modes have the same selection sprite
-				This can be confusing if piece don't have any possibility to move
+    09/01/2020 > [0.1.1] :
+        - Added a few sprites
+        - Fixed image display bugs (Echeckisen.c and GfxLib.c)
+        - Dead squares system
+        - Functions existsDead(), addDead() and rmvDead() implemented
+        - Pawn transformation (inside rmvDead() and moveSquare())
+        - Player attribute "checked" and function checkForChecked() (without content)
+        - Save option key (input and display without save system)
+        BUGS : Pawns can kill in front of them
+        NOTES : MOVE and POSSIBILITIES modes have the same selection sprite
+        This can be confusing if piece don't have any possibility to move
 
-	09/01/2020 > [0.1.2] :
-		- Pawns can't kill in front of them
-		- Pawns can kill in front diagonals if enemy on it
-		- Adding sprite for selection in POSSIBILITIES mode
-		- Basic functions for position set for pawns and knight
-		- Adding sprite to see selected piece in POSSIBILITIES mode
-		- Player attribute "checked" and function checkForChecked() (content)
-		- Detection of mat added in checkForChecked()
-		- Win screens (BLACK and WHITE)
-		- Draw key (leads to another win screen saying "DRAW")
-		- Restart option (press R) and function resetGame()
-		- Game information (last action) displayed in console
-		- Set game information when piece moved
-		- Set game information when pawn promoted
-		- Set game information when piece move, eating an opponent
-		- Function getTypeChar() added for better comfort
-		BUGS : Turn timer not updating when moving a piece
+    09/01/2020 > [0.1.2] :
+        - Pawns can't kill in front of them
+        - Pawns can kill in front diagonals if enemy on it
+        - Adding sprite for selection in POSSIBILITIES mode
+        - Basic functions for position set for pawns and knight
+        - Adding sprite to see selected piece in POSSIBILITIES mode
+        - Player attribute "checked" and function checkForChecked() (content)
+        - Detection of mat added in checkForChecked()
+        - Win screens (BLACK and WHITE)
+        - Draw key (leads to another win screen saying "DRAW")
+        - Restart option (press R) and function resetGame()
+        - Game information (last action) displayed in console
+        - Set game information when piece moved
+        - Set game information when pawn promoted
+        - Set game information when piece move, eating an opponent
+        - Function getTypeChar() added for better comfort
+        BUGS : Turn timer not updating when moving a piece
 
-	10/01/2020 > [0.1.3] :
-		- Fixed previous turn timer bug
-		- Save system implemented (in save/save.txt)
+    10/01/2020 > [0.1.3] :
+        - Fixed previous turn timer bug
+        - Save system implemented (in save/save.txt)
 
-	12/01/2020 > [0.1.4] :
-		- Graphic interface activator at start of Echeckisen.c, Echeckisen.h and makefile
-		- Separation in 2 files (+headers) : Echeckisen.c/.h Utilities.c/.h
+    12/01/2020 > [0.1.4] :
+        - Graphic interface activator at start of Echeckisen.c, Echeckisen.h and makefile
+        - Separation in 2 files (+headers) : Echeckisen.c/.h Utilities.c/.h
 
-	Contacts : sheridan.mamfoumbi-doukaga@isen.yncrea.fr
+    18/01/2021 > [0.1.5] :
+        - In console mode : removed draw key, changed action key from ' ' to 'A' and added key 'S'.
+
+    Contacts : sheridan.mamfoumbi-doukaga@isen.yncrea.fr
                christ.ndong-eyi@isen.yncrea.fr
                antoine.roziere@isen.yncrea.fr
                frederic.terrasson@isen.yncrea.fr
                axel.meloni@isen.yncrea.fr
                sebastien.silvano@isen.yncrea.fr
 
-	/!\ WARNING /!\ : Pay attention to GfxLib, features added !
+         /!\ WARNING /!\ : Pay attention to GfxLib, features added !
 
-	Special thanks to Ghislain Oudinet for GfxLib : ghislain.oudinet@isen.fr
-	ISEN Toulon : www.isen.fr
+        Special thanks to Ghislain Oudinet for GfxLib : ghislain.oudinet@isen.fr
+        ISEN Toulon : www.isen.fr
 ******************************************************************************************
 
     LICENCE :
@@ -1098,15 +1103,16 @@ void* console_timeLoop(void* g){
 
 void console_gestionEvenements(char cmd, game* g){
 	switch(cmd){
-		case 'D':
-		case 'd':
-			keyboard_normal(g,'d');
-		break;
 		case 'R':
 		case 'r':
 			keyboard_normal(g,'r');
 		break;
-		case ' ':
+		case 'S':
+		case 's':
+			keyboard_normal(g,'s');
+		break;
+		case 'A':
+		case 'a':
 			keyboard_normal(g,' ');
 		break;
 		case 'O':
@@ -1138,10 +1144,11 @@ void lanceBoucleEvenements(){
 	globalInitialization(&g);
 	refreshScreens(&g);
 	//event loop
+	int temp=0;
 	char cmd;
 	while(1){
 		threadOK = 1;
-		scanf("%c",&cmd); //get user input
+		temp+=scanf(" %c",&cmd); //get user input
 		threadOK = 0;
 		usleep(1000); //to be sure that timedExecution has finished executing
 		console_gestionEvenements(cmd,&g);
@@ -1156,7 +1163,7 @@ void lanceBoucleEvenements(){
 int main(int argc, char **argv){
 	#ifdef GRAPHICS_ON
 	initialiseGfx(argc, argv);
-	prepareFenetreGraphique("Echeckisen [0.1.4]", maxl, maxh);
+	prepareFenetreGraphique("Echeckisen [0.1.5]", maxl, maxh);
 	#endif
 	lanceBoucleEvenements();
 	return 0;
