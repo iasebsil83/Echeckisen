@@ -17,8 +17,8 @@ run: Echeckisen.o Utilities.o libisentlib.a
 
 else
 
-Echeckisen: Echeckisen.o Utilities.o
-	gcc -Wall -o Echeckisen Utilities.o Echeckisen.o -O2 -lpthread
+run: Echeckisen.o Utilities.o
+	gcc -Wall -o run Utilities.o Echeckisen.o -O2 -lpthread
 	rm -f *.o libisentlib.a
 
 endif
