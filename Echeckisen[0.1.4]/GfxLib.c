@@ -33,10 +33,10 @@
 //		ajout de modePleinEcran et de redimensionneFenetre
 //
 //	Version 2.3 (23/10/2006) : ajout des fonctions Timer et du redessin programme
-//	
+//
 //	Version 2.2 (30/06/2006) : prepareFenetreGraphique fait cycler la position
 //		de depart des fenetres
-//	
+//
 //	Version 2.1 : main est sorti de la bibliotheque, pour des besoins pedagogiques,
 //		cassant la compatibilite avec les anciens codes. Cependant, on peut reintegrer
 //		le main manquant dans chaque programme, a partir du code suivant :
@@ -193,7 +193,7 @@ static void prepareFenetre_En_DeTaille(const char *nom, int xCoinHautGauche, int
 void prepareFenetreGraphique(const char *nom, int largeur, int hauteur)
 {
 	static int positionDepart = 32;
-	
+
 	sLargeurFenetre = largeur;
 	sHauteurFenetre = hauteur;
 	prepareFenetre_En_DeTaille(nom, positionDepart, positionDepart, largeur, hauteur);
@@ -236,7 +236,7 @@ static void prepareFenetre_En_DeTaille(const char *nom, int xCoinHautGauche, int
 	glEnable(GL_POINT_SMOOTH);
 	glEnable(GL_LINE_SMOOTH);
 	glEnable(GL_POLYGON_SMOOTH);
-	
+
 	/* Normalisation des vecteurs normaux ;-) */
 	glEnable(GL_NORMALIZE);
 
@@ -263,7 +263,7 @@ void lanceBoucleEvenements(void)
 
 	/* Indique que la fonction ci-presente a ete appelee */
 	boucleEvenementsLancee = true;
-	
+
 	/* Lance le message d'initialisation de la boucle d'evenements */
 	gestionEvenement(Initialisation);
 
@@ -336,7 +336,7 @@ void triangle(float xCoin1, float yCoin1, float xCoin2, float yCoin2, float xCoi
 		glVertex2f(xCoin3, yCoin3);
 	glEnd();
 	// Retrace le contour pour l'adoucir
-	
+
 	if (sEpaisseurDeTrait != 1.f)
 		glLineWidth(1.f);
 	glBegin(GL_LINE_LOOP);
@@ -364,7 +364,7 @@ void afficheChaine(const char *chaine, float taille, float x, float y)
 {
 	char *pointeurChaine = (char *)chaine;
 	const float tailleScaling = taille/120.f;
-	
+
 	glPushMatrix();
 	glTranslatef(x, y, 0);
 	glScalef(tailleScaling, tailleScaling, tailleScaling);
@@ -436,23 +436,23 @@ void lisImage(int x, int y, int largeur, int hauteur, unsigned char *donnees)
 	int *pixels = (int*)malloc(largeur*hauteur*sizeof(int));
 	int *ptrPixel;
 	int index;
-	
+
 	glReadPixels(x, y, largeur, hauteur, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
 
 	ptrPixel = pixels;
 	ptrDonnees = donnees;
 	for(index = largeur*hauteur; index != 0; --index){ //On parcourt tous les pixels lus
 		int pixel = *ptrPixel; // On lit le pixel courant
-		
+
 		/* On extrait chaque composante du pixel, qu'on met dans les donnees */
 		ptrDonnees[0] = bleuDuPixel(pixel);
 		ptrDonnees[1] = vertDuPixel(pixel);
 		ptrDonnees[2] = rougeDuPixel(pixel);
-		
+
 		++ptrPixel; /* On passe au pixel suivant */
-		ptrDonnees += 3; /* On passe aux donnees suivantes */		
+		ptrDonnees += 3; /* On passe aux donnees suivantes */
 	}
-	
+
 	free(pixels);
 }
 
@@ -463,7 +463,7 @@ static int *BVR2ARVB(int largeur, int hauteur, const unsigned char *donnees)
 	unsigned char *pixels = (unsigned char*)malloc(largeur*hauteur*sizeof(int));
 	unsigned char *ptrPixel;
 	int index;
-	
+
 	ptrPixel = pixels;
 	ptrDonnees = donnees;
 	for(index = largeur*hauteur; index != 0; --index){ //On parcourt tous les pixels de l'image
@@ -491,7 +491,7 @@ int *BVRA2ARVB(int largeur, int hauteur, const unsigned char *donnees){
 	unsigned char *pixels = (unsigned char*)malloc(largeur*hauteur*sizeof(int));
 	unsigned char *ptrPixel;
 	int index;
-	
+
 	ptrPixel = pixels;
 	ptrDonnees = donnees;
 	for(index = largeur*hauteur; index != 0; --index){ //On parcourt tous les pixels de l'image
@@ -619,14 +619,14 @@ Texture2D *creeTexture2D(int largeur, int hauteur, const int *pixels)
 	Texture2D *texture = (Texture2D*)malloc(sizeof(Texture2D));
 	int largeur2m = 64;
 	int hauteur2m = 64;
-	
+
 	texture->largeur = largeur;
 	texture->hauteur = hauteur;
 	while(largeur2m < largeur) largeur2m += largeur2m; // On calcule la largeur sous la forme 2^m
 	while(hauteur2m < hauteur) hauteur2m += hauteur2m; // On calcule la hauteur sous la forme 2^m
 	texture->proportionX = (float)largeur/(float)largeur2m;
 	texture->proportionY = (float)hauteur/(float)hauteur2m;
-	
+
 	texture->donnees = (int*)calloc(largeur2m*hauteur2m, sizeof(int));
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -779,7 +779,7 @@ static void fonctionAffichage(void)
 	GLenum erreur;
 #endif
 //	glLoadIdentity();
-	
+
 	glFlush();
 	glClearColor(0.f, 0.f, 0.f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -787,7 +787,7 @@ static void fonctionAffichage(void)
 	/* On appelle tout simplement la fonction generique de gestion des evenements */
 	gestionEvenement(Affichage);
 	glutSwapBuffers();
-	
+
 #ifdef DEBUG_MODE
 	/* Afficher une erreur OpenGL si celle-ci a eu lieu */
 	if
@@ -828,71 +828,71 @@ static void fonctionClavierSpecial(int codeTouche, int xSouris, int ySouris)
 		case GLUT_KEY_F1:
 			sToucheClavier = ToucheF1;
 			break;
-			
+
 		case GLUT_KEY_F2:
 			sToucheClavier = ToucheF2;
 			break;
-			
+
 		case GLUT_KEY_F3:
 			sToucheClavier = ToucheF3;
 			break;
-			
+
 		case GLUT_KEY_F4:
 			sToucheClavier = ToucheF4;
 			break;
-			
+
 		case GLUT_KEY_F5:
 			sToucheClavier = ToucheF5;
 			break;
-			
+
 		case GLUT_KEY_F6:
 			sToucheClavier = ToucheF6;
 			break;
-			
+
 		case GLUT_KEY_F7:
 			sToucheClavier = ToucheF7;
 			break;
-			
+
 		case GLUT_KEY_F8:
 			sToucheClavier = ToucheF8;
 			break;
-			
+
 		case GLUT_KEY_F9:
 			sToucheClavier = ToucheF9;
 			break;
-			
+
 		case GLUT_KEY_F10:
 			sToucheClavier = ToucheF10;
 			break;
-			
+
 		case GLUT_KEY_F11:
 			sToucheClavier = ToucheF11;
 			break;
-			
+
 		case GLUT_KEY_F12:
 			sToucheClavier = ToucheF12;
 			break;
-			
+
 		case GLUT_KEY_UP:
 			sToucheClavier = ToucheFlecheHaut;
 			break;
-			
+
 		case GLUT_KEY_DOWN:
 			sToucheClavier = ToucheFlecheBas;
 			break;
-			
+
 		case GLUT_KEY_LEFT:
 			sToucheClavier = ToucheFlecheGauche;
 			break;
-			
+
 		case GLUT_KEY_RIGHT:
 			sToucheClavier = ToucheFlecheDroite;
 			break;
-			
+
 		default:
 			sToucheClavier = ToucheNonGeree;
 	}
-	
+
 #ifdef ACTION_CLAVIER_MEMORISE_POSITION_SOURIS
 	sAbscisseSouris = xSouris;
 	sOrdonneeSouris = sHauteurFenetre-ySouris;

@@ -5,21 +5,39 @@
 
 
 
+
+
+
+#executable
 ifeq ($(G),"GRAPHICS_ON")
 
-run: Echeckisen.o Utilities.o Utilities.h libisentlib.a
-	gcc -Wall -o run Echeckisen.o Utilities.o libisentlib.a -lm -lglut -lGL -lX11
+run: Echeckisen.o Utilities.o libisentlib.a
+	gcc -Wall -o run Echeckisen.o Utilities.o libisentlib.a -O2 -lm -lglut -lGL -lX11
+	rm -f *.o libisentlib.a
 
 else
 
-Echeckisen: Echeckisen.o Utilities.o Utilities.h
-	gcc -Wall -o Echeckisen Utilities.o Echeckisen.o -lpthread
+Echeckisen: Echeckisen.o Utilities.o
+	gcc -Wall -o Echeckisen Utilities.o Echeckisen.o -O2 -lpthread
+	rm -f *.o libisentlib.a
 
 endif
 
-Utilities.o: Utilities.c Utilities.h
-	gcc -Wall -O2 -c Utilities.c
 
+
+
+
+
+#utilities
+Utilities.o: Utilities.c Utilities.h
+	gcc -Wall -c Utilities.c -O2
+
+
+
+
+
+
+#GfxLib libraries
 libisentlib.a: ESLib.o GfxLib.o
 	ar r libisentlib.a ESLib.o GfxLib.o
 	ranlib libisentlib.a
@@ -29,10 +47,3 @@ ESLib.o: ESLib.c ESLib.h ErreurLib.h
 
 GfxLib.o: GfxLib.c GfxLib.h ESLib.h
 	gcc -Wall -O2 -c GfxLib.c -I/usr/include/GL
-
-clean:
-	rm -f *~ *.o
-
-deepclean: clean
-	rm -f Echeckisen libisentlib.a
-

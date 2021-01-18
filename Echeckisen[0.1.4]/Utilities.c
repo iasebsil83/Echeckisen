@@ -118,7 +118,7 @@ void moveSquare(game* g, int x1, int y1, int x2, int y2){
 	if(g->board[y1][x1].type == KING){
 		if(owner == 'w')
 			g->p_white.kingMoved = 1;
-		else			
+		else
 			g->p_black.kingMoved = 1;
 	}
 	//reset the start case
@@ -131,9 +131,9 @@ void moveSquare(game* g, int x1, int y1, int x2, int y2){
 }
 
 char* getTimeStr(int seconds){
-	int min = (int)(seconds/60);
-	int sec = (int)(seconds-min*60);
-	char* text = malloc(21);
+	int min = seconds/60;
+	int sec = seconds-min*60;
+	char* text = malloc(24);
 	if(min > 9){
 		if(sec > 9)
 			sprintf(text,"%i:%i",min,sec);
@@ -151,7 +151,7 @@ char* getTimeStr(int seconds){
 char* getNbrStr(int nbr){
 	if(nbr > 9999)
 		return "  OF";
-	char* str = malloc(12);
+	char* str = malloc(15);
 	if(nbr > 999){
 		sprintf(str,"%i",nbr);
 		return str;

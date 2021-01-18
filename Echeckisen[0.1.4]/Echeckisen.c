@@ -42,6 +42,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Echeckisen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	Developped using GfxLib :
 	Project developped for ISEN Toulon, an Yncrea Mediterranee engineering school
@@ -67,7 +81,7 @@
 		BUGS : Pawns can kill in front of them
 		NOTES : MOVE and POSSIBILITIES modes have the same selection sprite
 				This can be confusing if piece don't have any possibility to move
-	
+
 	09/01/2020 > [0.1.2] :
 		- Pawns can't kill in front of them
 		- Pawns can kill in front diagonals if enemy on it
@@ -85,7 +99,7 @@
 		- Set game information when piece move, eating an opponent
 		- Function getTypeChar() added for better comfort
 		BUGS : Turn timer not updating when moving a piece
-	
+
 	10/01/2020 > [0.1.3] :
 		- Fixed previous turn timer bug
 		- Save system implemented (in save/save.txt)
@@ -102,7 +116,7 @@
                sebastien.silvano@isen.yncrea.fr
 
 	/!\ WARNING /!\ : Pay attention to GfxLib, features added !
-	
+
 	Special thanks to Ghislain Oudinet for GfxLib : ghislain.oudinet@isen.fr
 	ISEN Toulon : www.isen.fr
 ******************************************************************************************
@@ -124,6 +138,20 @@
 
     If not, see <https://www.gnu.org/licenses/>.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -182,6 +210,20 @@ static int threadOK = 0;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ======================= SAVE ===========================
 
 // ---- data management ----
@@ -212,7 +254,7 @@ int charToInt(char c){
 #endif
 int saveGame(game* g){
 	//save file
-	FILE* file;	
+	FILE* file;
 	char saveString[200];
 	unsigned char index = 0;
 	printf("Create a new save.txt\n");
@@ -222,9 +264,9 @@ int saveGame(game* g){
 		return 0;
 	}
 	printf("Fichier créé\n\n");
-	
+
 	//distributes data
-	//add board 
+	//add board
 	for(int i=0;i<8;i++){
 		for(int k=0;k<8;k++){
 			saveString[index] = g->board[i][k].owner + '0';
@@ -233,7 +275,7 @@ int saveGame(game* g){
 			index++;
 		}
 	}
-	
+
 	//add white dead then add black dead
 	for(int i=0;i<7;i++){
 		saveString[index] = g->p_white.dead[i].owner + '0';
@@ -260,36 +302,36 @@ int saveGame(game* g){
 	//start save
 	fprintf(file,"%s",saveString);
 	fflush(file);
-	
-	//add turn player 
+
+	//add turn player
 	//white
 	if(g->p_white.turnCnt > 10000)
 		fprintf(file,"0000");
 	else if((int)(g->p_white.turnCnt/1000) != 0)
 		fprintf(file, "%d", g->p_white.turnCnt);
 	else if((int)(g->p_white.turnCnt/100) != 0)
-		fprintf(file, "0%d", g->p_white.turnCnt);		
+		fprintf(file, "0%d", g->p_white.turnCnt);
 	else if((int)(g->p_white.turnCnt/10) != 0)
-		fprintf(file, "00%d", g->p_white.turnCnt);	
+		fprintf(file, "00%d", g->p_white.turnCnt);
 	else if((int)(g->p_white.turnCnt) != 0)
-		fprintf(file, "000%d", g->p_white.turnCnt);		
+		fprintf(file, "000%d", g->p_white.turnCnt);
 	else
-		fprintf(file, "0000");		
-	
+		fprintf(file, "0000");
+
 	//black
 	if(g->p_black.turnCnt > 10000)
 		fprintf(file,"0000");
 	else if((int)(g->p_black.turnCnt/1000) != 0)
 		fprintf(file, "%d", g->p_black.turnCnt);
 	else if((int)(g->p_black.turnCnt/100) != 0)
-		fprintf(file, "0%d", g->p_black.turnCnt);		
+		fprintf(file, "0%d", g->p_black.turnCnt);
 	else if((int)(g->p_black.turnCnt/10) != 0)
-		fprintf(file, "00%d", g->p_black.turnCnt);	
+		fprintf(file, "00%d", g->p_black.turnCnt);
 	else if((int)(g->p_black.turnCnt) != 0)
-		fprintf(file, "000%d", g->p_black.turnCnt);		
+		fprintf(file, "000%d", g->p_black.turnCnt);
 	else
 		fprintf(file, "0000");
-	
+
 	//force finish save
 	fflush(file);
 	fclose(file);
@@ -306,14 +348,14 @@ int loadGame(game* g){
 		printf("Cannot open the file\n");
 		return 0;
 	}
-	
+
 	//read save
 	fscanf(file,"%s",loadString);
 	//delchar(loadString,1,strlen(loadString)-8);
 	//delchar(loadString,1,strlen(loadString)-8);
-	
+
 	//distribute data on game variables
-	//add board 
+	//add board
 	for(int i=0;i<8;i++){
 		for(int k=0;k<8;k++){
 			g->board[i][k].owner = charToInt(loadString[index]);
@@ -345,7 +387,7 @@ int loadGame(game* g){
 	g->p_white.kingMoved = charToInt(loadString[index]);
 	index++;
 	g->p_black.kingMoved = charToInt(loadString[index]);
-	
+
 	//add turn player
 	g->p_white.turnCnt =
 		charToInt(loadString[161])*1000 +
@@ -359,11 +401,25 @@ int loadGame(game* g){
 		charToInt(loadString[167])*10 +
 		charToInt(loadString[168])
 	;
-	
+
 	//finish
 	fclose(file);
 	return 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -670,6 +726,20 @@ void refreshScreens(game* g){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ====================== CONTROL ==========================
 
 // ---- initialisation ----
@@ -680,7 +750,7 @@ void setBasicValues(game* g){
 			g->board[y][x].owner = VOID;
 			g->board[y][x].type = PAWN;
 			g->board[y][x].x = x;
-			g->board[y][x].y = y;			
+			g->board[y][x].y = y;
 			g->board[y][x].able = 0;
 		}
 	}
@@ -787,7 +857,7 @@ void keyboard_special(game* g, char key){
 				}
 				refreshScreens(g);
 			break;
-			case '^': //go up		
+			case '^': //go up
 				if(g->mode == MOVE){
 					if(g->moveSelY > 0)
 						g->moveSelY--;
@@ -891,11 +961,11 @@ void keyboard_normal(game* g, char key){
 									   	g->p_white.castling = 1;
 									}else{
 										moveSquare(g,g->moveSelX,g->moveSelY, g->possSelX,g->possSelY);
-										moveSquare(g,0,7,2,7);	
+										moveSquare(g,0,7,2,7);
 									   	g->p_black.castling = 1;
 									}
 								}else
-									moveSquare(g,g->moveSelX,g->moveSelY, g->possSelX,g->possSelY);						
+									moveSquare(g,g->moveSelX,g->moveSelY, g->possSelX,g->possSelY);
 								finishTurn(g);
 								refreshScreens(g);
 								return;
@@ -951,6 +1021,20 @@ void timedExecution(game* g){
 		finishTurn(g);
 	refreshScreens(g);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1077,4 +1161,3 @@ int main(int argc, char **argv){
 	lanceBoucleEvenements();
 	return 0;
 }
-
