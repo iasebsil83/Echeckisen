@@ -1,6 +1,6 @@
 #to activate graphic mode :
 #	uncomment the line below
-#	G = "GRAPHICS_ON"
+	G = "GRAPHICS_ON"
 #	do the same in Echeckisen.c and in Echeckisen.h before compilation
 
 
@@ -44,8 +44,8 @@ libisentlib.a: ESLib.o GfxLib.o
 	ar r libisentlib.a ESLib.o GfxLib.o
 	ranlib libisentlib.a
 
-ESLib.o: ESLib.c ESLib.h ErreurLib.h
-	gcc -Wall -O2 -c ESLib.c
+ESLib.o: src/ESLib.c src/ESLib.h src/ErreurLib.h
+	gcc -Wall -c src/ESLib.c -O2
 
-GfxLib.o: GfxLib.c GfxLib.h ESLib.h
-	gcc -Wall -O2 -c GfxLib.c -I/usr/include/GL
+GfxLib.o: src/GfxLib.c src/GfxLib.h src/ESLib.h
+	gcc -Wall -c src/GfxLib.c -I/usr/include/GL -O2

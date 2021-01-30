@@ -8,7 +8,7 @@
 
 //to activate graphic mode :
 //	uncomment the line below
-//	#define GRAPHICS_ON
+	#define GRAPHICS_ON
 //	do the same in Echeckisen.h and makefile before compilation
 
 //keys for console-only mode
@@ -34,7 +34,7 @@
 	#include <unistd.h> //for sleep()
 #else
 	//graphics
-	#include "GfxLib.h" //graphics
+	#include "src/GfxLib.h" //graphics
 #endif
 //game
 #include "Utilities.h"
