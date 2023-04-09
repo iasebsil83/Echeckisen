@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 //graphic engine
 #ifdef __APPLE__
 	#include <GLUT/glut.h>
@@ -13,16 +11,8 @@
 	#include <glut.h>
 #endif
 
-
-
 //own header
 #include "S2DE.h"
-
-
-
-
-
-
 
 
 
@@ -114,12 +104,6 @@
 
 
 
-
-
-
-
-
-
 // ---------------- INITIALIZATION ----------------
 
 //window
@@ -144,12 +128,6 @@ unsigned int S2DE_height = 0;
 
 //event handler
 extern void S2DE_event(int event);
-
-
-
-
-
-
 
 
 
@@ -244,12 +222,6 @@ static void S2DEL_reshape(int width,int height){
 	S2DE_width  = width;
 	S2DE_height = height;
 }
-
-
-
-
-
-
 
 
 
@@ -400,12 +372,6 @@ void S2DE_setTimer(int ms){
 	//set new timedExecution delay
 	S2DE_timedExecution_delay = ms;
 }
-
-
-
-
-
-
 
 
 

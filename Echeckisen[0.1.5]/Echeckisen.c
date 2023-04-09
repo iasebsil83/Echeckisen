@@ -46,20 +46,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~ Echeckisen [0.1.5] ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Developped using S2DE :
 
@@ -147,20 +133,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ==================== DECLARATIONS ======================
 
 // ---- game ----
@@ -211,20 +183,6 @@ static img img_w_pawn,   img_b_pawn;
 #else
 static int threadOK = 0;
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -409,20 +367,6 @@ int loadGame(game* g){
 	free(loadString);
 	return 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -756,20 +700,6 @@ void refreshScreens(game* g){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ====================== CONTROL ==========================
 
 // ---- initialisation ----
@@ -1052,20 +982,6 @@ void timedExecution(game* g){
 		finishTurn(g);
 	refreshScreens(g);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

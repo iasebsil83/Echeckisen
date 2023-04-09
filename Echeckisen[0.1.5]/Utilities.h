@@ -6,12 +6,6 @@
 
 
 
-
-
-
-
-
-
 // ==================== DEFINITIONS =======================
 
 // ---- squares ----
@@ -91,12 +85,6 @@ typedef struct GAME game;
 
 
 
-
-
-
-
-
-
 // ===================== UTILITIES ========================
 
 // ---- useful ----
@@ -127,12 +115,6 @@ void setCastlingPoss(game* g);
 int trySetPossOnBoard(game* g, int x, int y);
 void setPossOnBoard(game* g, int x, int y);
 void resetPossOnBoard(game* g);
-
-
-
-
-
-
 
 
 

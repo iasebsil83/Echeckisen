@@ -4,10 +4,6 @@
 
 
 
-
-
-
-
 // ---------------- DECLARATIONS ----------------
 
 //keyboard constants
@@ -174,8 +170,6 @@ enum S2DE_KEYS{
 	S2DE_KEY_CEDILLA_C  = 0x0e7
 };
 
-
-
 //event constants
 enum S2DE_EVENTS{
 	S2DE_KEYBOARD,
@@ -186,16 +180,12 @@ enum S2DE_EVENTS{
 	S2DE_TIMER
 };
 
-
-
 //mouse constants
 #define S2DE_MOUSE_PRESSED  0x0000
 #define S2DE_MOUSE_RELEASED 0x0001
 #define S2DE_LEFT_BUTTON    0x0000
 #define S2DE_MIDDLE_BUTTON  0x0001
 #define S2DE_RIGHT_BUTTON   0x0002
-
-
 
 
 
@@ -230,10 +220,6 @@ void S2DE_setTimer(int ms);
 
 
 
-
-
-
-
 // ---------------- BASICS -----------------
 
 //init
@@ -242,10 +228,6 @@ void S2DE_init(int argc, char** argv, const char* name, unsigned int width,unsig
 //start - stop
 void S2DE_start();
 void S2DE_stop();
-
-
-
-
 
 
 

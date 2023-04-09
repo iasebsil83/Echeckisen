@@ -6,10 +6,6 @@
 
 
 
-
-
-
-
 #executable & program
 ifeq ($(G),"GRAPHICS_ON")
 
@@ -36,26 +32,13 @@ endif
 
 
 
-
-
-
-
 #utilities
 Utilities.o: Utilities.c Utilities.h
 	gcc -Wall -c Utilities.c -O2
 
-
-
-
-
-
-
-
 #graphic library
 S2DE.o: src/S2DE.c src/S2DE.h
 	gcc -Wall -c src/S2DE.c -I/usr/include/GL -O2
-
-
 
 #file library
 files.o: src/files.c src/files.h

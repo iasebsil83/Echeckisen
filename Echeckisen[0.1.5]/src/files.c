@@ -4,24 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 //own header
 #include "files.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -84,20 +68,6 @@
 
     If not, see <https://www.gnu.org/licenses/>.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
