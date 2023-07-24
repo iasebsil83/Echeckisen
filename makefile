@@ -30,6 +30,10 @@ endif
 
 
 
+#echeckisen
+Echeckisen.o: Echeckisen.c Echeckisen.h Utilities.h libisentlib.a
+	gcc -Wall -c Echeckisen.c -O2
+
 #utilities
 Utilities.o: Utilities.c Utilities.h
 	gcc -Wall -c Utilities.c -O2
