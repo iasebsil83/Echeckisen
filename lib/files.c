@@ -4,8 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
+
 //own header
 #include "files.h"
+
+
 
 
 
@@ -54,17 +59,20 @@
     LICENCE :
 
     C_Files
-    Copyright (C) 2021  Sebastien SILVANO
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    any later version.
-    This program is distributed in the hope that it will be useful,
+    Copyright (C) 2021 Sebastien SILVANO
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License
-    along with this program.
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library.
 
     If not, see <https://www.gnu.org/licenses/>.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -74,21 +82,23 @@
 
 
 
-// ---------------- READ / WRITE ----------------
-int file_read(char* path, char** data, size_t* length){ // reads from file #path#
-                                                        // output data into #data#
-	//incorrect path                                // and data length into #length#
-	if(path == NULL){                               // WARNING ! Value inside data should not refer to anything.
-		printf("RUNTIME ERROR > files.c : file_read() : "); //                          (can refer to NULL)
-		printf("Path is NULL.\n");
+
+
+// ---------------- BASICS ----------------
+
+//read - write - append
+char file_read(char* path, char** data, size_t* length){ // reads from file #path#, output data into #data#, and data length into #length#
+                                                         // WARNING ! Value inside data should not refer to anything (can refer to NULL).
+	//incorrect path
+	if(path == NULL){
+		printf("RUNTIME ERROR > files.c : file_read() : Path is NULL.\n");
 		return FILES__PATH_IS_NULL;
 	}
 
 	//opening file
 	FILE* f = fopen(path,"rb");
 	if(f == NULL){
-		printf("RUNTIME ERROR > files.c : file_read() : ");
-		printf("No file \"%s\" found.\n", path);
+		printf("RUNTIME ERROR > files.c : file_read() : No file \"%s\" found.\n", path);
 		return FILES__NO_FILE_FOUND;
 	}
 
@@ -98,6 +108,10 @@ int file_read(char* path, char** data, size_t* length){ // reads from file #path
 
 	//prepare data reception
 	*data = malloc(*length);
+	if(*data == NULL){
+		printf("FATAL ERROR > files.c : file_read() : Computer refuses to give more memory.\n");
+		exit(EXIT_FAILURE);
+	}
 	size_t d=0;
 	for(; d < *length; d++)
 		(*data)[d] = '\0';
@@ -113,19 +127,17 @@ int file_read(char* path, char** data, size_t* length){ // reads from file #path
 	return FILES__SUCCESS;
 }
 
-int file_write(char* path, char** data, size_t* length){ // writes into file #path#
-                                                         // data from #data#
-	//incorrect path                                 // from index 0 to #length#
-	if(path == NULL){                                // WARNING ! Value inside data will not be free.
-		printf("RUNTIME ERROR > files.c : file_write() : ");
-		printf("Path is NULL.\n");
+char file_write(char* path, char** data, size_t* length){ // writes into file #path#, data from #data# from index 0 to #length#
+                                                          // WARNING ! Value inside data will not be free.
+	//incorrect path
+	if(path == NULL){
+		printf("RUNTIME ERROR > files.c : file_write() : Path is NULL.\n");
 		return FILES__PATH_IS_NULL;
 	}
 
 	//incorrect data
 	if(data == NULL || *data == NULL){
-		printf("RUNTIME ERROR > files.c : file_write() : ");
-		printf("Cannot write NULL data.\n");
+		printf("RUNTIME ERROR > files.c : file_write() : Cannot write NULL data.\n");
 		return FILES__DATA_IS_NULL;
 	}
 
@@ -144,19 +156,17 @@ int file_write(char* path, char** data, size_t* length){ // writes into file #pa
 	return FILES__SUCCESS;
 }
 
-int file_append(char* path, char** data, size_t* length){ // writes into file #path#
-                                                          // data from #data#
-	//incorrect path                                  // from index 0 to #length#
-	if(path == NULL){                                 // WARNING ! Value inside data will not be free.
-		printf("RUNTIME ERROR > files.c : file_append() : ");
-		printf("Path is NULL.\n");
+char file_append(char* path, char** data, size_t* length){ // same warnings as file_write()
+
+	//incorrect path
+	if(path == NULL){
+		printf("RUNTIME ERROR > files.c : file_append() : Path is NULL.\n");
 		return FILES__PATH_IS_NULL;
 	}
 
 	//incorrect data
 	if(data == NULL || *data == NULL){
-		printf("RUNTIME ERROR > files.c : file_append() : ");
-		printf("Cannot write NULL data.\n");
+		printf("RUNTIME ERROR > files.c : file_append() : Cannot write NULL data.\n");
 		return FILES__DATA_IS_NULL;
 	}
 
